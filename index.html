@@ -110,13 +110,65 @@
         </section>
       </div>
 
-      <!-- НАВИГАЦИЯ -->
-      <nav class="bottom-nav">
-        <div class="nav-item active" onclick="switchView('home', this)"><i class="fa-solid fa-compass"></i><span>Обзор</span></div>
-        <div class="nav-item" onclick="switchView('chat', this)"><i class="fa-solid fa-message"></i><span>Чат</span></div>
-      </nav>
+      <!-- СТРАНИЦА КОНФИДЕНЦИАЛЬНОСТИ -->
+<section class="page" id="view-privacy">
+  <div class="privacy-content">
+    
+    <!-- Шапка страницы -->
+    <div class="privacy-header">
+      <div class="logo-glow" style="margin: 0 auto 15px;"><i class="fa-solid fa-shield-halved"></i></div>
+      <h2>Безопасность<span> E2EE</span></h2>
+      <p>Твои данные под защитой ScrapGram</p>
     </div>
+    
+    <!-- Карточки с инфой -->
+    <div class="info-card">
+      <h4><i class="fa-solid fa-user-secret"></i> Нулевое хранение</h4>
+      <p>Мы не храним историю сообщений на серверах. Все данные живут только в оперативной памяти и удаляются после завершения сессии.</p>
+    </div>
+
+    <div class="info-card">
+      <h4><i class="fa-solid fa-key"></i> Локальные ключи</h4>
+      <p>Пароль (Seed-фраза) шифрования хранится исключительно в твоем браузере. Если ты его забудешь, доступ к сообщениям восстановить невозможно.</p>
+    </div>
+
+    <div class="info-card">
+      <h4><i class="fa-solid fa-microchip"></i> AES-256 Алгоритм</h4>
+      <p>Для защиты канала используется военный стандарт шифрования. Каждое сообщение — это нечитаемый код для всех, кроме участников чата.</p>
+    </div>
+
+    <div class="info-card">
+      <h4><i class="fa-solid fa-hand-holding-hand"></i> Открытый код</h4>
+      <p>Протоколы ScrapGram прозрачны. Ты всегда можешь проверить исходный код проекта на нашем GitHub.</p>
+    </div>
+
+    <!-- Футер -->
+    <div class="privacy-footer">
+      <p><i class="fa-solid fa-circle-check"></i> Соединение защищено</p>
+      <small>Version 1.1 - beta | ScrapGram Security Protocol</small>
+    </div>
+
   </div>
+</section>
+
+
+      <!-- НАВИГАЦИЯ -->
+<nav class="bottom-nav">
+  <div class="nav-item active" onclick="switchView('home', this)">
+    <i class="fa-solid fa-compass"></i>
+    <span>Обзор</span>
+  </div>
+  <div class="nav-item" onclick="switchView('chat', this)">
+    <i class="fa-solid fa-message"></i>
+    <span>Чат</span>
+  </div>
+  <!-- Новая кнопка -->
+  <div class="nav-item" onclick="switchView('privacy', this)">
+    <i class="fa-solid fa-shield-halved"></i>
+    <span>Защита</span>
+  </div>
+</nav>
+
 
   <!-- МОДАЛКА ВХОДА В КАНАЛ -->
   <div id="mod-join" class="modal">
@@ -125,12 +177,19 @@
       <input type="text" id="j-rid" placeholder="ID канала (напр: neo-matrix)">
       <input type="password" id="j-seed" placeholder="Пароль шифрования">
       <div class="modal-btns">
-        <button class="btn-cancel" onclick="closeModal('mod-join')">Отмена</button>
-        <button class="btn-blue" onclick="joinRoomAction()">Войти</button>
+        <nav class="bottom-nav">
+  <div class="nav-item active" onclick="switchView('home', this)"><i class="fa-solid fa-compass"></i><span>Обзор</span></div>
+  <div class="nav-item" onclick="switchView('chat', this)"><i class="fa-solid fa-message"></i><span>Чат</span></div>
+
+  <div class="nav-item" onclick="switchView('privacy', this)"><i class="fa-solid fa-shield-lock"></i><span>Приватность</span></div>
+</nav>
+
       </div>
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <script src="config.js"></script>
+<script src="script.js"></script>
+
 </body>
 </html>
