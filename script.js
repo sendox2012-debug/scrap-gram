@@ -1,7 +1,7 @@
 // ================== КОНФИГ ==================
 // Склеиваем токен из двух частей, чтобы сканер GitHub его не нашел
 const GITHUB_TOKEN = 'ghp_i4h' + 'Nk7dBCCqfdy8bhsefv4lIF6HVIE3hsj6S';
-const GIST_ID = '05385289bf081d66669ec5631ef6254c';
+const GIST_ID = 'c1466226143ec9ec9ade2054bf0accbe';
 
 
 let currentUser = null;
@@ -302,5 +302,6 @@ document.addEventListener('DOMContentLoaded', () => {
  const saved = localStorage.getItem('aether_active_user');
  if (saved) selectProfile(saved);
 });
+
 
 
