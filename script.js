@@ -1,6 +1,6 @@
 // ================== КОНФИГ ==================
-const GITHUB_TOKEN = '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';
-const GIST_ID = 'd76afa557faac4b5616c6be215060a22';
+const GITHUB_TOKEN = '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';
+const GIST_ID = 'b6350ef3f782e3a8b35ad6961b0a7321';
 
 let currentUser = null;
 let activeRoom = null; // { id: 'room-name', seed: 'password' }
@@ -300,3 +300,4 @@ document.addEventListener('DOMContentLoaded', () => {
  const saved = localStorage.getItem('aether_active_user');
  if (saved) selectProfile(saved);
 });
+
