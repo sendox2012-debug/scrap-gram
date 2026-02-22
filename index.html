@@ -171,24 +171,28 @@
 
 
   <!-- МОДАЛКА ВХОДА В КАНАЛ -->
-  <div id="mod-join" class="modal">
-    <div class="modal-card">
-      <h3>Вход в канал</h3>
-      <input type="text" id="j-rid" placeholder="ID канала (напр: neo-matrix)">
-      <input type="password" id="j-seed" placeholder="Пароль шифрования">
-      <div class="modal-btns">
-        <nav class="bottom-nav">
-  <div class="nav-item active" onclick="switchView('home', this)"><i class="fa-solid fa-compass"></i><span>Обзор</span></div>
-  <div class="nav-item" onclick="switchView('chat', this)"><i class="fa-solid fa-message"></i><span>Чат</span></div>
 
-  <div class="nav-item" onclick="switchView('privacy', this)"><i class="fa-solid fa-shield-lock"></i><span>Приватность</span></div>
-</nav>
 
-      </div>
-    </div>
+<!-- Само модальное окно (должно быть ВНЕ всех секций, лучше в самом конце body) -->
+<div id="mod-join" class="modal">
+ <div class="modal-card">
+  <div class="modal-head" style="margin-bottom: 20px; text-align: center;">
+   <h3 style="margin:0; color:var(--blue);">Вход в канал</h3>
+   <p style="font-size: 12px; opacity: 0.5;">Введите ID Gist-файла и пароль</p>
   </div>
+  
+  <input type="text" id="j-rid" placeholder="ID (напр: chat-room)" style="width:100%; margin-bottom:15px; padding:15px; border-radius:12px; background:#1a1a1a; border:1px solid #333; color:#fff;">
+  <input type="password" id="j-seed" placeholder="Пароль шифрования" style="width:100%; margin-bottom:20px; padding:15px; border-radius:12px; background:#1a1a1a; border:1px solid #333; color:#fff;">
+  
+  <div class="modal-btns" style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+   <button class="btn-cancel" onclick="closeModal('mod-join')" style="padding:15px; border-radius:12px; border:none; background:#222; color:#fff;">Отмена</button>
+   <button class="btn-blue" onclick="joinRoomAction()" style="margin:0;">Войти</button>
+  </div>
+ </div>
+</div>
 
-  <script src="config.js"></script>
+
+
 <script src="script.js"></script>
 
 </body>
