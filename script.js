@@ -4,7 +4,7 @@ const GIST_ID = '71fe47697f83edc73e946df249bd25ed';
 const AUTH_FILE = '__users_db__.txt';
 const PUBLIC_ROOMS = [
  { id: 'lobby', name: 'Главный Холл', icon: 'fa-solid fa-ghost', color: 'card-blue', seed: 'public_lobby_1337' },
- { id: 'offtop', name: 'Оффтоп / Флуд', icon: 'fa-solid fa-mug-hot', color: 'card-pink', seed: 'offtop_vibes_99' },
+ { id: 'offtop', name: 'Флудилка', icon: 'fa-solid fa-mug-hot', color: 'card-pink', seed: 'offtop_vibes_99' },
  { id: 'dev-zone', name: 'Разработка', icon: 'fa-solid fa-code', color: 'card-purple', seed: 'dev_secret_key_88' },
  { id: 'crypto', name: 'Крипто-Чат', icon: 'fa-solid fa-bitcoin-sign', color: 'card-orange', seed: 'crypto_anon_99' }
 ];
@@ -364,3 +364,4 @@ function scrollToBottom() {
   behavior: 'smooth'
  });
 }
+
