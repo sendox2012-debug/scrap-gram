@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+ <title>Aether Spaces | Secure Accounts</title>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+ <div class="app-wrapper">
+ 
+ <!-- ЭКРАН 1: АВТОРИЗАЦИЯ -->
+<div id="scr-auth" class="screen active">
+ <div class="auth-content">
+ <div class="brand-zone">
+  <div class="logo-glow"><i class="fa-solid fa-atom"></i></div>
+  <h1>Aether <span>Spaces</span></h1>
+ </div>
+
+ <div id="profiles-grid" class="profiles-grid"></div>
+
+ <div class="auth-form-box">
+  <!-- Переключатель вкладок -->
+  <div class="auth-tabs">
+  <div class="a-tab active" onclick="setAuthMode('login', this)">Вход</div>
+  <div class="a-tab" onclick="setAuthMode('reg', this)">Регистрация</div>
+  </div>
+
+  <div class="input-group">
+  <i class="fa-solid fa-user"></i>
+  <input type="text" id="nick-input" placeholder="Никнейм">
+  </div>
+  <div class="input-group">
+  <i class="fa-solid fa-key"></i>
+  <input type="password" id="pass-input" placeholder="Пароль">
+  </div>
+  
+  <button class="btn-blue" id="auth-main-btn" onclick="handleAuth()">Войти в аккаунт</button>
+  <p id="auth-desc" class="auth-hint">Введите данные для доступа к профилю</p>
+ </div>
+ </div>
+</div>
+
+<!-- СТРАНИЦА ЧАТА  -->
+<section class="page" id="view-chat">
+ <div id="chat-active" class="chat-ui" style="display: none;">
+ <div class="chat-header">...</div>
+ 
+ <!-- Основной бокс сообщений -->
+ <div id="msg-box" class="msg-box"></div>
+
+ <!-- Панель управления  -->
+ <div class="chat-controls">
+  <div class="input-bar">
+  <button onclick="document.getElementById('file-inp').click()"><i class="fa-solid fa-paperclip"></i></button>
+  <input type="file" id="file-inp" style="display:none">
+  <input type="text" id="msg-inp" placeholder="Написать...">
+  <button onclick="sendMessage()"><i class="fa-solid fa-paper-plane"></i></button>
+  </div>
+ </div>
+ </div>
+</section>
+
+
+ <!-- ЭКРАН 2: ОСНОВНОЕ ПРИЛОЖЕНИЕ -->
+ <div id="scr-app" class="screen">
+  
+  <!-- ШАПКА -->
+  <header class="app-header">
+  <div class="user-meta" onclick="toProfiles()">
+   <div class="avatar-box" id="hdr-av">?</div>
+   <div class="user-txt">
+   <b id="hdr-nick">User</b>
+   <div class="profile-switch-chip"><span>Выйти</span></div>
+   </div>
+  </div>
+  <button class="btn-circle-plus" onclick="openModal('mod-join')">
+   <i class="fa-solid fa-plus"></i>
+  </button>
+  </header>
+
+  <div class="view-viewport">
+  
+  <!-- СТРАНИЦА: ОБЗОР -->
+  <section class="page active" id="view-home">
+   <div class="section-divider"><h3>Наши ресурсы</h3></div>
+   <div class="social-links-grid">
+   <a href="#" class="social-card tg"><i class="fa-brands fa-telegram"></i><span>TG Channel</span></a>
+   <a href="#" class="social-card gh"><i class="fa-brands fa-github"></i><span>GitHub</span></a>
+   </div>
+
+   <div class="section-divider"><h3>Публичные Хабы</h3></div>
+   <div id="public-rooms-grid" class="rooms-grid-cool"></div>
+
+   <div class="section-divider"><h3>Ваша активность</h3></div>
+   <div id="room-list" class="rooms-feed">
+   <div class="empty-state">Нет активных чатов</div>
+   </div>
+  </section>
+
+  <!-- СТРАНИЦА: ЧАТ -->
+  <section class="page" id="view-chat">
+   <div id="chat-closed" class="chat-placeholder">
+   <i class="fa-solid fa-comments"></i>
+   <p>Выберите канал на вкладке "Обзор" или создайте новый через (+)</p>
+   </div>
+
+   <div id="chat-active" class="chat-ui" style="display: none;">
+   <div class="chat-header">
+    <div class="room-info">
+    <b id="active-room-name">#room</b>
+    <span class="secure-tag"><i class="fa-solid fa-shield-halved"></i> E2EE</span>
+    </div>
+    <button class="refresh-btn" onclick="loadMessages()"><i class="fa-solid fa-rotate"></i></button>
+   </div>
+   
+   <div id="msg-box" class="msg-box"></div>
+
+   <div class="chat-controls">
+    <div class="input-bar">
+    <button onclick="document.getElementById('file-inp').click()"><i class="fa-solid fa-paperclip"></i></button>
+    <input type="file" id="file-inp" style="display:none">
+    <input type="text" id="msg-inp" placeholder="Написать..." autocomplete="off">
+    <button id="voice-btn" onclick="toggleRecording()"><i class="fa-solid fa-microphone"></i></button>
+    <button onclick="sendMessage()" class="send-main-btn"><i class="fa-solid fa-paper-plane"></i></button>
+    </div>
+   </div>
+   </div>
+  </section>
+
+  <!-- СТРАНИЦА: ПРИВАТНОСТЬ -->
+  <section class="page" id="view-privacy">
+   <div class="section-divider"><h3>Безопасность</h3></div>
+   <div class="privacy-content">
+   <div class="p-card-dark">
+    <i class="fa-solid fa-user-secret"></i>
+    <h4>Аккаунты</h4>
+    <p>Ваш ник привязан к хэшу пароля в Gist. Никто не сможет войти под вашим именем без пароля.</p>
+   </div>
+   <div class="p-card-dark">
+    <i class="fa-solid fa-key"></i>
+    <h4>Шифрование</h4>
+    <p>Все сообщения и файлы шифруются AES-256 на вашем устройстве перед отправкой.</p>
+   </div>
+   </div>
+  </section>
+
+  </div>
+
+  <!-- НАВИГАЦИЯ -->
+  <nav class="bottom-nav">
+  <div class="nav-item active" onclick="switchView('home', this)"><i class="fa-solid fa-compass"></i><span>Обзор</span></div>
+  <div class="nav-item" onclick="switchView('chat', this)"><i class="fa-solid fa-message"></i><span>Чат</span></div>
+  <div class="nav-item" onclick="switchView('privacy', this)"><i class="fa-solid fa-shield-heart"></i><span>Приват</span></div>
+  </nav>
+
+ </div>
+ </div>
+
+ <!-- МОДАЛКА: ВХОД В КАНАЛ -->
+ <div id="mod-join" class="modal">
+ <div class="modal-card">
+  <h3>Вход в канал</h3>
+  <input type="text" id="j-rid" placeholder="ID канала">
+  <input type="password" id="j-seed" placeholder="Пароль шифрования (SEED)">
+  <div class="modal-btns">
+  <button class="btn-cancel" onclick="closeModal('mod-join')">Отмена</button>
+  <button class="btn-blue" onclick="joinRoomAction()">Войти</button>
+  </div>
+ </div>
+ </div>
+
+ <div id="upload-status" class="global-status"></div>
+
+ <script src="script.js"></script>
+
+</body>
+</html>
