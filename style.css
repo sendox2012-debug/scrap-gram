@@ -13,6 +13,7 @@
 }
 
 * {
+  border: transparent;
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
   margin: 0;
@@ -1363,42 +1364,66 @@ h1 span {
 }
 
 .msg-box {
- flex: 1;
- overflow-y: auto;
- display: flex;
- flex-direction: column;
- gap: 12px;
- 
- /* ОТСТУП СВЕРХУ: Чтобы первое сообщение не упиралось в шапку */
- padding: 90px 20px 20px 20px !important; 
- 
- /* ОТСТУП СНИЗУ: Чтобы последнее сообщение не пряталось за вводом */
- padding-bottom: 170px !important; 
- 
- scroll-behavior: smooth;
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  /* ОТСТУП СВЕРХУ: Чтобы первое сообщение не упиралось в шапку */
+  padding: 90px 20px 20px 20px !important;
+
+  /* ОТСТУП СНИЗУ: Чтобы последнее сообщение не пряталось за вводом */
+  padding-bottom: 170px !important;
+
+  scroll-behavior: smooth;
 }
 
 /* Дополнительно: чтобы шапка не перекрывала контент при скролле */
 .chat-header {
- position: absolute; /* Или sticky */
- top: 0;
- left: 0;
- width: 100%;
- z-index: 110;
- background: rgba(10, 10, 10, 0.8);
- backdrop-filter: blur(15px);
- -webkit-backdrop-filter: blur(15px);
- border-bottom: 1px solid var(--border);
- padding: calc(env(safe-area-inset-top) + 10px) 20px 10px;
-}
-.msg-box {
- flex: 1;
- overflow-y: auto;
- display: flex;
- flex-direction: column;
- gap: 12px;
- /* 100px сверху обеспечит идеальный зазор от шапки */
- padding: 100px 20px 20px 20px !important; 
- padding-bottom: 170px !important; 
+  position: absolute;
+  /* Или sticky */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 110;
+  background: rgba(10, 10, 10, 0.8);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-bottom: 1px solid var(--border);
+  padding: calc(env(safe-area-inset-top) + 10px) 20px 10px;
 }
 
+.msg-box {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  padding: 100px 20px 20px 20px !important;
+  padding-bottom: 170px !important;
+}
+
+
+.app-header, .chat-header {
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
+
+
+.bottom-nav {
+  border-top: none !important;
+}
+
+
+.input-bar {
+  border: none !important;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+
+.room-cool-card, .room-card-active-btn, .auth-form-box {
+  border: none !important;
+}
